@@ -1,17 +1,17 @@
 # Compressor
 
-Java programm able to compress and decompress .txt and .ppm files.
+Java program able to compress and decompress .txt and .ppm files.
 
 ## What it does
-Compress .txt and .ppm files to a .compressed file and it decompress it to the original file using JPEG and LZSS algorithm.
+Compress .txt and .ppm files to a .compressed file and decompress it to the original file using JPEG and LZSS algorithm.
 
 ## How I built it
-We developed using java SDK8 and AWT and Swing for the frontend.
+We developed using java SDK8 and AWT and Swing for the front-end.
 
 ## Challenges I ran into
 ##### Learn Java.
 ##### Search information about the JPEG algorithm.
-##### Learn about UI/UX and frontend AWT Java.
+##### Learn about UI/UX and front-end AWT Java.
 
 ## How to run it?
 ```
@@ -27,7 +27,7 @@ make run
 
 
 #### English 
-To achieve the JPEG compression, several algorithms applied to the input image had to be followed. First of all, the conversion of RGB components to Y'CbCr is performed. Discrete cosine transform and later the quantization tables are applied. These quantization tables have been modified using the quality value introduced at the beginning, following the standard formulas, and Huffman coding is finally applied using the predefined tables. The codification is done using Strings divisions and checking that they are not equivalent to some Huffman code. The coding was done as follows:
+To achieve the JPEG compression, several algorithms applied to the input image had to be followed. First of all, the conversion of the RGB components to Y'CbCr is performed. Discrete cosine transform and later the quantization tables are applied. These quantization tables have been modified using the quality value introduced at the beginning, following the standard formulas, and Huffman coding is finally applied using the predefined tables. The codification is done using Strings divisions and checking that they are not equivalent to some Huffman code. The coding was done as follows:
 
 The DC block is coded as:
 ```
@@ -42,7 +42,7 @@ Symbol 1 = (RLE, SIZE):
 -Size -> Number of bits to represent AC number ((Huffman Encoded))
 Symbol 2 = (Amplitude) - X-bit representation
 ```
-In addition, the bits had to be left-padded for the correct encoding. This is, filling with zeros, because when we convert a BinaryString to int, to save it in the archive, the zeros on the left are "lost" and when we read we did not have them. Finally, a 6 Byte (0xFF) mark was put to mark the end of the block. Through trial-and-error, it has been found that 6 Bytes is enough for this script to avoid accidentally errors. Lastly, the quality value is saved in the compressed, so it will allow us to reconstruct the decomposition quantization tables. Following these steps we obtain an encoded file that later, using the same steps, but vice versa, we can convert to a visible .ppm file.
+In addition, the bits had to be left-padded for the correct encoding. This is, filling with zeros, because when we convert a BinaryString to int, to save it in the archive, the zeros on the left are "lost" and when we read we did not have them. Finally, a 6 Byte (0xFF) mark was put to mark the end of the block. Through trial-and-error, it has been found that 6 Bytes are enough for this script to avoid accidental errors. Lastly, the quality value is saved in the compressed, so it will allow us to reconstruct the decomposition quantization tables. Following these steps, we obtain an encoded file that later, using the same steps, but vice versa, we can convert to a visible .ppm file.
 
 For the decompressed part, the algorithm first search until it founds the previous mark defined (6 Bytes in (0xFF)). Once we have all the code we had to look for the value of the DC component following the coding explained above. Then we look for values until we find a **1010** that indicates that we have reached the end of the array. And once we have all the matrices filled, we proceed to apply the inverse operations, such as the dequantization, the transformation of the inverse cosine, etc. Finally it is saved with a .ppm file.
 
