@@ -6,7 +6,7 @@ Java program able to compress and decompress .txt and .ppm files.
 Compress .txt and .ppm files to a .compressed file and decompress it to the original file using JPEG and LZSS algorithm.
 
 ## How I built it
-We developed using java SDK8 and AWT and Swing for the front-end.
+We developed it using java SDK8 and AWT and Swing for the front-end.
 
 ## Challenges I ran into
 ##### Learn Java.
